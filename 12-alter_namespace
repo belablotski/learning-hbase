@@ -1,0 +1,1 @@
+alter_namespace 'avb_ns', {METHOD => 'set', 'PROPERTY_NAME' => 'PROPERTY_VALUE'}

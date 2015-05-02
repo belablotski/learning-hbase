@@ -1,0 +1,52 @@
+# See http://hbase.apache.org/book.html#specify.number.of.versions
+# The maximum number of versions to store for a given column is part of the column schema 
+# and is specified at table creation, or via an alter command, via HColumnDescriptor.DEFAULT_VERSIONS. 
+# Prior to HBase 0.96, the default number of versions kept was 3, but in 0.96 and newer has been changed to 1.
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:name', 'John'
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 25
+
+# scans between 1430535567367 and 1430535567368 (right value exclusive)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 26
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 26 (newest value)
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 27
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 27 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 28
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 28 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 29
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 29 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 30
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 30 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+put 'avb_ns:avb_test', '123-12-1234', 'avb_column_family:age', 31
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 31 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns John 25
+
+#-----------------------------------------------------------------------------------------------------------
+
+# Change number of versions
+alter 'avb_ns:avb_test', { VERSIONS => 2 }
+
+describe 'avb_ns:avb_test'
+
+
+# Also possible to specify minimum number of versions to store per column family. 
+# By default, this is set to 0, which means the feature is disabled. 
+# alter 't1', NAME => 'f1', MIN_VERSIONS => 2
+
+# See http://hbase.apache.org/book.html#versions.ops
+
+#-----------------------------------------------------------------------------------------------------------
+
+scan 'avb_ns:avb_test', {COLUMNS => 'avb_column_family:age'}		# returns 31 (newest value)
+scan 'avb_ns:avb_test', TIMERANGE => [1430535567367,1430535567368]	# returns empty set

@@ -1,0 +1,6 @@
+create 'avb_ns:avb_test', 'avb_column_family'
+
+
+# Returns ["avb_ns:avb_test", "avb_test"]
+# There are two tables avb_test: in avb_ns and outside it.
+list '.*avb_test.*'

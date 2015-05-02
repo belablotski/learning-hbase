@@ -1,0 +1,3 @@
+# Will throw an exception: "Drop the named namespace. The namespace must be empty."
+
+drop_namespace 'avb_ns'
