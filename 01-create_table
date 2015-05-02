@@ -1,0 +1,3 @@
+create 'avb_test', 'avb_column_family'
+
+list 'avb_test'

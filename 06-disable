@@ -1,0 +1,3 @@
+# If you want to delete a table or change its settings, as well as in some other situations, you need to disable the table first, using the disable command.
+
+disable 'avb_test'

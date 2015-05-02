@@ -1,0 +1,5 @@
+See http://hbase.apache.org/book.html#_commands
+
+Count command returns the number of rows in a table. It’s quite fast when configured with the right CACHE
+
+hbase> count '<tablename>', CACHE => 1000

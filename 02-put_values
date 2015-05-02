@@ -1,0 +1,7 @@
+put 'avb_test', 'row1', 'avb_column_family:name', 'John'
+put 'avb_test', 'row1', 'avb_column_family:surname', 'Doe'
+put 'avb_test', 'row1', 'avb_column_family:age', '25'
+
+put 'avb_test', 'row2', 'avb_column_family:name', 'Mary' 
+put 'avb_test', 'row2', 'avb_column_family:surname', 'Stuart'
+put 'avb_test', 'row2', 'avb_column_family:age', '27'

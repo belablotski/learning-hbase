@@ -1,0 +1,5 @@
+put 'avb_test', 'row3', 'avb_column_family:name', 'Jim'
+put 'avb_test', 'row3', 'avb_column_family:age', '30'
+
+put 'avb_test', 'row4', 'avb_column_family:name', 'Ann' 
+put 'avb_test', 'row4', 'avb_column_family:surname', 'Brown'

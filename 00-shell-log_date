@@ -1,0 +1,14 @@
+http://hbase.apache.org/book.html#_log_data_to_timestamp
+
+
+To convert the date '08/08/16 20:56:29' from an hbase log into a timestamp, do:
+
+hbase(main):021:0> import java.text.SimpleDateFormat
+hbase(main):022:0> import java.text.ParsePosition
+hbase(main):023:0> SimpleDateFormat.new("yy/MM/dd HH:mm:ss").parse("08/08/16 20:56:29", ParsePosition.new(0)).getTime() => 1218920189000
+
+
+To go the other direction:
+
+hbase(main):021:0> import java.util.Date
+hbase(main):022:0> Date.new(1218920189000).toString() => "Sat Aug 16 20:56:29 UTC 2008"

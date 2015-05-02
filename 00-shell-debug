@@ -1,0 +1,7 @@
+# http://hbase.apache.org/book.html#_debug
+
+# interactive:
+debug
+
+# command line:
+$ ./bin/hbase shell -d
